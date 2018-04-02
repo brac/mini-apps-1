@@ -1,2 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            table {
+                font-size: 30px;
+            }
 
+            td {
+                width: 40px;
+                height: 40px;
+                border: solid 1px gray;
+            }
+
+            button {
+                font-size: 15px;
+                margin-top: 5px;
+            }
+
+            #winner {
+                margin-top: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Mo's Tic Tac Toe</h1>
+        <table>
+            <tr>
+                <td id="td0" onclick="clickXO(this.id)"></td>
+                <td id="td1" onclick="clickXO(this.id)"></td>
+                <td id="td2" onclick="clickXO(this.id)"></td>
+            </tr>
+            <tr>
+                <td id="td3" onclick="clickXO(this.id)"></td>
+                <td id="td4" onclick="clickXO(this.id)"></td>
+                <td id="td5" onclick="clickXO(this.id)"></td>
+            </tr>
+            <tr>
+                <td id="td6" onclick="clickXO(this.id)"></td>
+                <td id="td7" onclick="clickXO(this.id)"></td>
+                <td id="td8" onclick="clickXO(this.id)"></td>
+            </tr>
+        </table>
+        <button id="btn" onclick="refershPage()">Restart!</button>
+        <h1 id="winner" onclick="detectWinner()">Winner is...?</h1>
+        <script src="app.js"></script>
+    </body>
+</html>
 
