@@ -1,28 +1,37 @@
+// remember previously selected td
+var prevouseTdText;
 
-var button = document.getElementById('btn');
+// remember last winner
+var winner;
 
 // Resset the game
-var refershPage = function(){
-    location.reload();
+var resetGame = function(){
+    var tds = document.getElementsByTagName('td');
+    for(var i = 0; i < tds.length; i++){
+        tds[i].innerHTML = '';
+    }
 }
 
-var counter = 0;
-var prevouseTdText;
+var getUserName = function(){
+    
+}
 
 // User to mark X or O
 // Always start from X 
 var clickXO = function(id){
     var currentTd = document.getElementById(id);
+    var username = document.getElementById('name').value;
     if(!prevouseTdText){
-        currentTd.innerHTML = "X";
-        prevouseTdText = 'X';
-    } else if(prevouseTdText === "X"){
+        currentTd.innerHTML = username;
+        prevouseTdText = username;
+    } else if(prevouseTdText === username){
         currentTd.innerHTML = "O";
         prevouseTdText = "O";
     } else if (prevouseTdText === "O") {
-        currentTd.innerHTML = "X";
-        prevouseTdText = "X";
+        currentTd.innerHTML = username;
+        prevouseTdText = username;
     } 
+    detectWinner();
 }
 
 // Announce a winner 
@@ -70,14 +79,34 @@ var detectWinner = function(){
         return finalResult;
     }
 
+    var checkIfNotFull = function(array){
+        var finalResult = false;
+        var chekIfFullHelper = function(rowCol){
+            var result = !!rowCol.find((text)=> {
+                return text === '';
+            });
+            if(result !== ''){
+                result = true;
+                finalResult = true;
+                return result;
+            }        
+        }
+        for(var i = 0; i < array.length; i++){
+            chekIfFullHelper(array[i]);
+            if(chekIfFullHelper(array[i]) === true){break;}
+        }
+        return finalResult;
+    }
+    console.log(checkIfNotFull(allRowsCols));
 
     if(checkRowsCols(allRowsCols) === true && firstText === 'X'){
         document.getElementById('winner').innerText = 'Winner is X!!!';
+        winner = 'X';
     } else if (checkRowsCols(allRowsCols) === true && firstText === 'O'){
         document.getElementById('winner').innerText = 'Winner is O!!!';
-    } else {
+        winner = 'O';
+    } else if (checkIfNotFull(allRowsCols) === false) {
         document.getElementById('winner').innerText = 'Tie!!!';
-    }
-
-    
+    }   
 }
+

@@ -7,8 +7,8 @@
             }
 
             td {
-                width: 40px;
-                height: 40px;
+                width: 50px;
+                height: 50px;
                 border: solid 1px gray;
             }
 
@@ -24,6 +24,8 @@
     </head>
     <body>
         <h1>Mo's Tic Tac Toe</h1>
+        <h2>X won:<span id="x-win"></span></h2>
+        <h2>O won:<span id="o-win"></span></h2>
         <table>
             <tr>
                 <td id="td0" onclick="clickXO(this.id)"></td>
@@ -41,8 +43,17 @@
                 <td id="td8" onclick="clickXO(this.id)"></td>
             </tr>
         </table>
-        <button id="btn" onclick="refershPage()">Restart!</button>
-        <h1 id="winner" onclick="detectWinner()">Winner is...?</h1>
+        <button id="btn" onclick="resetGame()">Restart!</button>
+        <h1 id="winner">Winner is...?</h1>
+        <form>
+            <div>
+                <label for="name">Enter your name here: </label>
+                <input type="text" id="name" name="name"></input>            
+            </div>
+            <div>
+                <button onclick="getUserName()">Submit</button>
+            </div>
+        </form>
         <script src="app.js"></script>
     </body>
 </html>
