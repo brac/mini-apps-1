@@ -4,6 +4,10 @@ var prevouseTdText;
 // remember last winner
 var winner;
 
+// remember xUser & oUser
+var xUser;
+var oUser;
+
 // Resset the game
 var resetGame = function(){
     var tds = document.getElementsByTagName('td');
@@ -12,24 +16,32 @@ var resetGame = function(){
     }
 }
 
-var getUserName = function(){
-    
+
+// get usernames for X & O 
+var getUserName = function(id){
+    event.preventDefault();
+    if(id === 'btn-x'){
+        var usernameX = document.getElementById('name-x').value;
+        xUser = document.getElementById('x-name').innerHTML = usernameX;
+    } else if(id = 'btn-o'){
+        var usernameO = document.getElementById('name-o').value;
+        oUser = document.getElementById('o-name').innerHTML = usernameO;
+    }
 }
 
 // User to mark X or O
 // Always start from X 
 var clickXO = function(id){
     var currentTd = document.getElementById(id);
-    var username = document.getElementById('name').value;
     if(!prevouseTdText){
-        currentTd.innerHTML = username;
-        prevouseTdText = username;
-    } else if(prevouseTdText === username){
-        currentTd.innerHTML = "O";
-        prevouseTdText = "O";
-    } else if (prevouseTdText === "O") {
-        currentTd.innerHTML = username;
-        prevouseTdText = username;
+        currentTd.innerHTML = xUser;
+        prevouseTdText = xUser;
+    } else if(prevouseTdText === xUser){
+        currentTd.innerHTML = oUser;
+        prevouseTdText = oUser;
+    } else if (prevouseTdText === oUser) {
+        currentTd.innerHTML = xUser;
+        prevouseTdText = xUser;
     } 
     detectWinner();
 }
@@ -82,13 +94,12 @@ var detectWinner = function(){
     var checkIfNotFull = function(array){
         var finalResult = false;
         var chekIfFullHelper = function(rowCol){
-            var result = !!rowCol.find((text)=> {
+            var filtered = rowCol.filter((text)=> {
                 return text === '';
             });
-            if(result !== ''){
-                result = true;
+            if(filtered.length > 0){
                 finalResult = true;
-                return result;
+                return true;
             }        
         }
         for(var i = 0; i < array.length; i++){
@@ -97,16 +108,18 @@ var detectWinner = function(){
         }
         return finalResult;
     }
-    console.log(checkIfNotFull(allRowsCols));
 
-    if(checkRowsCols(allRowsCols) === true && firstText === 'X'){
-        document.getElementById('winner').innerText = 'Winner is X!!!';
+    if(checkRowsCols(allRowsCols) === true && firstText === xUser){
+        document.getElementById('winner').innerText = `Winner is ${xUser}!!!`;
         winner = 'X';
-    } else if (checkRowsCols(allRowsCols) === true && firstText === 'O'){
-        document.getElementById('winner').innerText = 'Winner is O!!!';
+        document.getElementById('x-win').innerHTML++;
+    } else if (checkRowsCols(allRowsCols) === true && firstText === oUser){
+        document.getElementById('winner').innerText = `Winner is ${oUser}!!!`;
         winner = 'O';
+        document.getElementById('o-win').innerHTML++;
     } else if (checkIfNotFull(allRowsCols) === false) {
         document.getElementById('winner').innerText = 'Tie!!!';
     }   
 }
 
+//module.exports = app;

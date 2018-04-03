@@ -1,60 +1,62 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            table {
-                font-size: 30px;
-            }
 
-            td {
-                width: 50px;
-                height: 50px;
-                border: solid 1px gray;
-            }
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-            button {
-                font-size: 15px;
-                margin-top: 5px;
-            }
+<body>
+    <h1>Mo's Tic Tac Toe</h1>
+    <h3 id="h2-1">X is now:
+        <span id="x-name"></span>
+    </h3>
+    <h3>X won:
+        <span id="x-win">0</span>
+    </h3>
+    <h3 id="h2-2">O is now:
+        <span id="o-name"></span>
+    </h3>
+    <h3>O won:
+        <span id="o-win">0</span>
+    </h3>
+    <table>
+        <tr>
+            <td id="td0" onclick="clickXO(this.id)"></td>
+            <td id="td1" onclick="clickXO(this.id)"></td>
+            <td id="td2" onclick="clickXO(this.id)"></td>
+        </tr>
+        <tr>
+            <td id="td3" onclick="clickXO(this.id)"></td>
+            <td id="td4" onclick="clickXO(this.id)"></td>
+            <td id="td5" onclick="clickXO(this.id)"></td>
+        </tr>
+        <tr>
+            <td id="td6" onclick="clickXO(this.id)"></td>
+            <td id="td7" onclick="clickXO(this.id)"></td>
+            <td id="td8" onclick="clickXO(this.id)"></td>
+        </tr>
+    </table>
+    <button id="btn" onclick="resetGame()">Restart!</button>
+    <h1 id="winner">Winner is...?</h1>
+    <form>
+        <div>
+            <label for="name">X! Enter your name here: </label>
+            <input type="text" id="name-x" name="name"></input>
+        </div>
+        <div>
+            <button id="btn-x"onclick="getUserName(this.id)">Submit</button>
+        </div>
+    </form>
+    <form>
+        <div>
+            <label for="name">O! Enter your name here: </label>
+            <input type="text" id="name-o" name="name"></input>
+        </div>
+        <div>
+            <button id="btn-o" onclick="getUserName(this.id)">Submit</button>
+        </div>
+    </form>
+    <script src="app.js"></script>
+</body>
 
-            #winner {
-                margin-top: 5px;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Mo's Tic Tac Toe</h1>
-        <h2>X won:<span id="x-win"></span></h2>
-        <h2>O won:<span id="o-win"></span></h2>
-        <table>
-            <tr>
-                <td id="td0" onclick="clickXO(this.id)"></td>
-                <td id="td1" onclick="clickXO(this.id)"></td>
-                <td id="td2" onclick="clickXO(this.id)"></td>
-            </tr>
-            <tr>
-                <td id="td3" onclick="clickXO(this.id)"></td>
-                <td id="td4" onclick="clickXO(this.id)"></td>
-                <td id="td5" onclick="clickXO(this.id)"></td>
-            </tr>
-            <tr>
-                <td id="td6" onclick="clickXO(this.id)"></td>
-                <td id="td7" onclick="clickXO(this.id)"></td>
-                <td id="td8" onclick="clickXO(this.id)"></td>
-            </tr>
-        </table>
-        <button id="btn" onclick="resetGame()">Restart!</button>
-        <h1 id="winner">Winner is...?</h1>
-        <form>
-            <div>
-                <label for="name">Enter your name here: </label>
-                <input type="text" id="name" name="name"></input>            
-            </div>
-            <div>
-                <button onclick="getUserName()">Submit</button>
-            </div>
-        </form>
-        <script src="app.js"></script>
-    </body>
 </html>
-
