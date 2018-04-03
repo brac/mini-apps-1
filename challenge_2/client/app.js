@@ -47,6 +47,7 @@ $(document).ready(()=>{
                     console.log('GET: data from server:', data);
                     console.log('Data received');
                     csvData = data;
+
                     app.render(data);
 
                 }, 
@@ -57,14 +58,33 @@ $(document).ready(()=>{
         },
 
         render: (data) => {
-
-            var dataArray = data.split(',');
-
-            var ths = $('th');
+            var splited = data.split('\n');
+            console.log('splited:', splited);
             
-            for(var i = 0; i < ths.length; i++){
-                $(ths[i]).text(dataArray[i]); 
-            }
+            // Render the table headers
+            var table = $('<table></table>');
+            var headers = splited[0];
+            var headersArray = headers.split(',').slice(0,6);
+
+            // create a table for headers 
+            var row = $('<tr></tr>');
+            $(table).append(row);
+            headersArray.forEach((data)=> {
+                $(row).append(`<th>${data}</th>`);
+            });
+            $('body').prepend(table);
+
+            // Render the rest of data 
+            var restData = splited.slice(1);
+            
+            restData.forEach((array)=> {
+                var row = $('<tr></tr>');
+                var eachPerson = array.split(',').slice(0,6);
+                eachPerson.forEach((person)=> {
+                    $(row).append(`<td>${person}</td>`);
+                });
+                $('table').append(row);
+            });
 
         }
     }

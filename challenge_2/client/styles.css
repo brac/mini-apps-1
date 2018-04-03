@@ -2,6 +2,7 @@ th {
     width: 100px;
     height: 30px;
     border: solid 1px black;
+    background-color: gray;
 }
 
 td {

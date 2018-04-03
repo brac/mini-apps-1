@@ -8,6 +8,9 @@ app.use(parser.json());
 
 var csv = '';
 
+// To keep track of each submission
+var id = 0;
+
 app.use((req, res, next)=>{
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", 
@@ -29,8 +32,8 @@ app.post('/mo__csv_generator', (req, res) => {
     getTitles(firstRow);
 
     // Get actual data for the table 
-    var restOfData = Object.keys(req.body).map((key)=> {return req.body[key];});
-    getData(restOfData);
+    // var restOfData = Object.keys(req.body).map((key)=> {return req.body[key];});
+    getData(req.body);
 
     // need to send as JS format
     res.send(csv);
@@ -43,8 +46,21 @@ var getTitles = (array) => {
     console.log('csv:', csv);
 }
 
-var getData = (array) => {
-    console.log('the rest of data:', array);
+var getData = (obj) => {
+    console.log(obj);
+    var restOfData = Object.keys(obj).map((key)=> {return obj[key];});
+    var arrayToString = restOfData.slice(0, 6).join(',');
+    csv += '\n' + arrayToString;
+ 
+    // Recursively find all the children data
+    if(obj.children){
+        for(var i = 0; i < obj.children.length; i++){
+            getData(obj.children[i]);
+        }
+    } else {
+         return;
+    }
+    console.log('final: ', csv);
 }
 
 // GET request
