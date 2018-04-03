@@ -31,6 +31,10 @@ var resetGame = function(){
             prevouseTdText = xUser;
         } 
     }
+    // Restting clicked property
+    for(var i = 0; i < tds.length; i ++){
+        tdsObj[tds[i].id] = {clicked: false};
+    }
 }
 
 
