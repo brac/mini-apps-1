@@ -14,6 +14,15 @@ var resetGame = function(){
     for(var i = 0; i < tds.length; i++){
         tds[i].innerHTML = '';
     }
+    console.log(winner);
+    if(winner){
+        alert(`${winner} starts first!`);
+        if(winner === xUser){
+            prevouseTdText = oUser;
+        } else {
+            prevouseTdText = xUser;
+        } 
+    }
 }
 
 
@@ -69,9 +78,11 @@ var detectWinner = function(){
 
     var allRowsCols = [row1, row2, row3, col1, col2, col3, major, minor];
 
+
     // Get the first text to check who's the winner
     var firstText;
 
+    // check winning conditiion
     var checkRowsCols = function(array){
         var finalResult;
         var checkWinner = function(rowCol){
@@ -91,6 +102,7 @@ var detectWinner = function(){
         return finalResult;
     }
 
+    // check if it's tie
     var checkIfNotFull = function(array){
         var finalResult = false;
         var chekIfFullHelper = function(rowCol){
@@ -111,11 +123,11 @@ var detectWinner = function(){
 
     if(checkRowsCols(allRowsCols) === true && firstText === xUser){
         document.getElementById('winner').innerText = `Winner is ${xUser}!!!`;
-        winner = 'X';
+        winner = xUser;
         document.getElementById('x-win').innerHTML++;
     } else if (checkRowsCols(allRowsCols) === true && firstText === oUser){
         document.getElementById('winner').innerText = `Winner is ${oUser}!!!`;
-        winner = 'O';
+        winner = oUser;
         document.getElementById('o-win').innerHTML++;
     } else if (checkIfNotFull(allRowsCols) === false) {
         document.getElementById('winner').innerText = 'Tie!!!';
