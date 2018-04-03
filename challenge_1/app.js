@@ -8,13 +8,21 @@ var winner;
 var xUser;
 var oUser;
 
+// To prevent double clicking
+var tds = document.querySelectorAll('td');
+var tdsObj = {};
+for(var i = 0; i < tds.length; i ++){
+    tdsObj[tds[i].id] = {clicked: false};
+}
+
+
 // Resset the game
 var resetGame = function(){
     var tds = document.getElementsByTagName('td');
     for(var i = 0; i < tds.length; i++){
         tds[i].innerHTML = '';
     }
-    console.log(winner);
+    console.log('winner:', winner);
     if(winner){
         alert(`${winner} starts first!`);
         if(winner === xUser){
@@ -41,18 +49,26 @@ var getUserName = function(id){
 // User to mark X or O
 // Always start from X 
 var clickXO = function(id){
+    console.log(tdsObj);
+
     var currentTd = document.getElementById(id);
-    if(!prevouseTdText){
-        currentTd.innerHTML = xUser;
-        prevouseTdText = xUser;
-    } else if(prevouseTdText === xUser){
-        currentTd.innerHTML = oUser;
-        prevouseTdText = oUser;
-    } else if (prevouseTdText === oUser) {
-        currentTd.innerHTML = xUser;
-        prevouseTdText = xUser;
-    } 
-    detectWinner();
+
+    if(tdsObj[id].clicked === false){
+        tdsObj[id].clicked = true;
+        if(!prevouseTdText){
+            currentTd.innerHTML = xUser;
+            prevouseTdText = xUser;
+        } else if(prevouseTdText === xUser){
+            currentTd.innerHTML = oUser;
+            prevouseTdText = oUser;
+        } else if (prevouseTdText === oUser) {
+            currentTd.innerHTML = xUser;
+            prevouseTdText = xUser;
+        } 
+        detectWinner();
+    } else {
+        alert('You can\'t select same spot!');
+    }
 }
 
 // Announce a winner 
@@ -125,13 +141,17 @@ var detectWinner = function(){
         document.getElementById('winner').innerText = `Winner is ${xUser}!!!`;
         winner = xUser;
         document.getElementById('x-win').innerHTML++;
+        resetGame();
     } else if (checkRowsCols(allRowsCols) === true && firstText === oUser){
         document.getElementById('winner').innerText = `Winner is ${oUser}!!!`;
         winner = oUser;
         document.getElementById('o-win').innerHTML++;
+        resetGame();
     } else if (checkIfNotFull(allRowsCols) === false) {
         document.getElementById('winner').innerText = 'Tie!!!';
+        resetGame();
     }   
+
 }
 
 //module.exports = app;
