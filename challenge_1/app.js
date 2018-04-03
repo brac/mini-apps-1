@@ -1,5 +1,5 @@
 // remember previously selected td
-var prevouseTdText;
+var previousText;
 
 // remember last winner
 var winner;
@@ -16,7 +16,7 @@ for(var i = 0; i < tds.length; i ++){
 }
 
 
-// Resset the game
+// Reset the game
 var resetGame = function(){
     var tds = document.getElementsByTagName('td');
     for(var i = 0; i < tds.length; i++){
@@ -26,12 +26,12 @@ var resetGame = function(){
     if(winner){
         alert(`${winner} starts first!`);
         if(winner === xUser){
-            prevouseTdText = oUser;
+            previousText = oUser;
         } else {
-            prevouseTdText = xUser;
+            previousText = xUser;
         } 
     }
-    // Restting clicked property
+    // Resetting clicked property
     for(var i = 0; i < tds.length; i ++){
         tdsObj[tds[i].id] = {clicked: false};
     }
@@ -59,15 +59,15 @@ var clickXO = function(id){
 
     if(tdsObj[id].clicked === false){
         tdsObj[id].clicked = true;
-        if(!prevouseTdText){
+        if(!previousText){
             currentTd.innerHTML = xUser;
-            prevouseTdText = xUser;
-        } else if(prevouseTdText === xUser){
+            previousText = xUser;
+        } else if(previousText === xUser){
             currentTd.innerHTML = oUser;
-            prevouseTdText = oUser;
-        } else if (prevouseTdText === oUser) {
+            previousText = oUser;
+        } else if (previousText === oUser) {
             currentTd.innerHTML = xUser;
-            prevouseTdText = xUser;
+            previousText = xUser;
         } 
         detectWinner();
     } else {
@@ -102,7 +102,7 @@ var detectWinner = function(){
     // Get the first text to check who's the winner
     var firstText;
 
-    // check winning conditiion
+    // check winning condition
     var checkRowsCols = function(array){
         var finalResult;
         var checkWinner = function(rowCol){
@@ -125,7 +125,7 @@ var detectWinner = function(){
     // check if it's tie
     var checkIfNotFull = function(array){
         var finalResult = false;
-        var chekIfFullHelper = function(rowCol){
+        var checkIfFullHelper = function(rowCol){
             var filtered = rowCol.filter((text)=> {
                 return text === '';
             });
@@ -135,8 +135,8 @@ var detectWinner = function(){
             }        
         }
         for(var i = 0; i < array.length; i++){
-            chekIfFullHelper(array[i]);
-            if(chekIfFullHelper(array[i]) === true){break;}
+            checkIfFullHelper(array[i]);
+            if(checkIfFullHelper(array[i]) === true){break;}
         }
         return finalResult;
     }
