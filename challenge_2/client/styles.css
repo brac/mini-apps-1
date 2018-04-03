@@ -1,0 +1,15 @@
+th {
+    width: 100px;
+    height: 30px;
+    border: solid 1px black;
+}
+
+td {
+    width: 30px;
+    height: 30px;
+    border: solid 1px black;
+}
+
+form {
+    margin-top: 10px;
+}
