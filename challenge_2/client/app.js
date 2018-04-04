@@ -75,9 +75,12 @@ $(document).ready(()=>{
         render: (data) => {
             var splited = data.split('\n');
             console.log('splited:', splited);
-            
+
+            $('#sales').remove();
+
             // Render the table headers
-            var table = $('<table></table>');
+            var table = $('<table id="sales"></table>');
+            
             var headers = splited[0];
             var headersArray = headers.split(',').slice(0,6);
 

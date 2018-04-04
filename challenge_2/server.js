@@ -34,7 +34,7 @@ app.use((req, res, next)=>{
   });
 
 // Serve the client files
-app.use(express.static(__dirname + '../client'));
+app.use(express.static('client'));
 
 // app.use("/", (req, res) => {
 //     res.sendFile(__dirname + "/client/index.html");
@@ -55,6 +55,7 @@ app.post('/mo__csv_generator', (req, res) => {
 
     // Call DB
     // Use connect method to connect to the server
+    let data = csv;
     mongoClient.connect(dbUrl, function(err, client) {
         if (err) throw err;
         console.log("Connected successfully to Mongo DB server");
@@ -66,8 +67,8 @@ app.post('/mo__csv_generator', (req, res) => {
             console.log('Created collection');
 
         // Insert it to the collection:
-        collection.insert(req.body, (err, docs)=>{
-            console.log('In Mongo!', req.body);
+        collection.insert({data}, (err, docs)=>{
+            console.log('In Mongo!', {data});
             console.log('Inserted Sales data');
         
             // Colletion#count() gives us the number of items in collection:
@@ -79,7 +80,7 @@ app.post('/mo__csv_generator', (req, res) => {
             // that can be converted to an array of documents:            
             collection.find().toArray((err, documents)=>{
                 documents.forEach((doc)=>{
-                    console.log('Found a document with name = ' + doc.firstName);
+                    console.log('Found a document with name = ' + doc.data);
                 });
             });
 
@@ -94,6 +95,10 @@ app.post('/mo__csv_generator', (req, res) => {
 
     // need to send as JS format
     res.send(csv);
+
+    // To reset csv and id
+    csv = '';
+    id = 0;
 });
 
 // Helper functions for POST request
