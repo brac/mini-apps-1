@@ -10,3 +10,6 @@ var board = [
 ];
 
 ReactDOM.render(<App board={board}/>, document.getElementById('app'));
+
+// 1. nested for loops
+// 2. only check board[r][c(static)] -> only check the column user clicked

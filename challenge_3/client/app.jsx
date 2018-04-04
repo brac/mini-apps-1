@@ -1,14 +1,34 @@
 class App extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            board: [
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0, 0]
+            ]
+        }
+
         this.clickCell = this.clickCell.bind(this);
     }
 
-    clickCell(e){
-        console.log(e.target.innerText);
+    clickCell(id){
+        console.log('col: ', id);
         console.log('click!');
-        var value = e.target.innerText;
-        e.target.innerText = '1';
+        // iterate through the column and check an empty spot
+        for(var i = this.state.board.length-1; i >= 0; i--){
+            console.log(this.state.board[i][id]);
+            if(this.state.board[i][id] === 0){
+                var copyboard = this.state.board.slice();
+                copyboard[i][id] = 1;
+                this.setState({board: copyboard});
+                break;
+            }
+        }
+
     }
 
     render() {
@@ -17,8 +37,8 @@ class App extends React.Component {
                 <h1>Welcome To Mo's Connect Four</h1>
                 <table>
                     <tbody>
-                        {this.props.board.map((row)=>
-                            <Rows key={row[0]} row={row} clickCell={this.clickCell}/>
+                        {this.state.board.map((row, index)=>
+                            <Rows cellId={this.state.cellId} rowId={'row' + index} key={'row' + index} row={row} clickCell={this.clickCell}/>
                         )}
                     </tbody>
                 </table>   
@@ -29,17 +49,16 @@ class App extends React.Component {
 
 // ES6 Syntax: if there's a curly braces, make sure to put 'return' keyword
 var Rows = (props) => (
-    <tr>
-        {props.row.map((item)=> {
-            
-            return <Cell key={item} item={item} clickCell={props.clickCell}/>
+    <tr id={props.rowId}>
+        {props.row.map((item, index)=> {
+            return <Cell cellId={'cell' + index} key={'cell' + index} item={item} clickCell={()=> props.clickCell(index)}/>
         })}
     </tr>
 );
 
 
 var Cell = (props) => (
-    <td onClick={(e)=>props.clickCell(e)}>
+    <td id={props.cellId} onClick={props.clickCell} >
         {props.item}
     </td>
 );
