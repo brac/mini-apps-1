@@ -1,4 +1,3 @@
-
 $(document).ready(()=>{
     
     // Set variable for original user input and converted csv data
@@ -69,6 +68,7 @@ $(document).ready(()=>{
             // create a table for headers 
             var row = $('<tr></tr>');
             $(table).append(row);
+            $(row).append(`<th>id</th>`);
             headersArray.forEach((data)=> {
                 $(row).append(`<th>${data}</th>`);
             });
@@ -76,10 +76,9 @@ $(document).ready(()=>{
 
             // Render the rest of data 
             var restData = splited.slice(1);
-            
             restData.forEach((array)=> {
                 var row = $('<tr></tr>');
-                var eachPerson = array.split(',').slice(0,6);
+                var eachPerson = array.split(',').slice(0,7);
                 eachPerson.forEach((person)=> {
                     $(row).append(`<td>${person}</td>`);
                 });

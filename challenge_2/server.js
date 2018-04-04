@@ -8,7 +8,7 @@ app.use(parser.json());
 
 var csv = '';
 
-// To keep track of each submission
+// To keep track of each data
 var id = 0;
 
 app.use((req, res, next)=>{
@@ -50,8 +50,8 @@ var getData = (obj) => {
     console.log(obj);
     var restOfData = Object.keys(obj).map((key)=> {return obj[key];});
     var arrayToString = restOfData.slice(0, 6).join(',');
-    csv += '\n' + arrayToString;
- 
+    csv += '\n' + id + ',' + arrayToString;
+    id++;
     // Recursively find all the children data
     if(obj.children){
         for(var i = 0; i < obj.children.length; i++){
