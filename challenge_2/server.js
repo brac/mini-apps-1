@@ -36,10 +36,6 @@ app.use((req, res, next)=>{
 // Serve the client files
 app.use(express.static('client'));
 
-// app.use("/", (req, res) => {
-//     res.sendFile(__dirname + "/client/index.html");
-// });
-
 // POST request
 app.post('/mo__csv_generator', (req, res) => {
     console.log('req.body:', req.body);

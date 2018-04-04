@@ -9,7 +9,6 @@ $(document).ready(()=>{
         event.preventDefault();
         input = $('textarea').val();
         console.log('input: ', input);
-        //console.log(typeof input);
         app.send(input);
     });
 
@@ -51,26 +50,6 @@ $(document).ready(()=>{
             //     }
             // });
         }, 
-
-        // // GET CSV data from the server
-        // fetch: (data) => {
-        //     $.ajax({
-        //         type: 'GET',
-        //         url: app.server,
-        //         data: data,
-        //         success: (data) => {
-        //             console.log('GET: data from server:', data);
-        //             console.log('Data received');
-        //             csvData = data;
-
-        //             app.render(data);
-
-        //         }, 
-        //         error: (error) => {
-        //             console.log('GET Failed');
-        //         }
-        //     });
-        // },
 
         render: (data) => {
             var splited = data.split('\n');
