@@ -20,20 +20,36 @@ $(document).ready(()=>{
 
         // POST the input to the server (JS format)
         send: (input) => {
-            $.ajax({
-                type: 'POST',
-                url: app.server,
-                data: input, 
-                contentType: 'application/json',
-                success: (data) => {
-                    console.log('POST: data from server', data);
-                    console.log('Data sent');
-                    app.render(data);
+            fetch(app.server, {
+                body: input,
+                headers: {
+                    'content-type': 'application/json'
                 },
-                error: (error) => {
-                    console.log('POST failed');
-                }
+                method: 'POST',
+            })
+            .then((response) => {
+                return response.text();
+            })
+            .catch((error)=> console.error('Error:', error))
+            .then((response) => {
+                console.log('Success:', response);
+                app.render(response);
             });
+
+            // $.ajax({
+            //     type: 'POST',
+            //     url: app.server,
+            //     data: input, 
+            //     contentType: 'application/json',
+            //     success: (data) => {
+            //         console.log('POST: data from server', data);
+            //         console.log('Data sent');
+            //         app.render(data);
+            //     },
+            //     error: (error) => {
+            //         console.log('POST failed');
+            //     }
+            // });
         }, 
 
         // // GET CSV data from the server
