@@ -28,7 +28,7 @@ $(document).ready(()=>{
                 success: (data) => {
                     console.log('POST: data from server', data);
                     console.log('Data sent');
-                    app.fetch(data);
+                    app.render(data);
                 },
                 error: (error) => {
                     console.log('POST failed');
@@ -36,25 +36,25 @@ $(document).ready(()=>{
             });
         }, 
 
-        // GET CSV data from the server
-        fetch: (data) => {
-            $.ajax({
-                type: 'GET',
-                url: app.server,
-                data: data,
-                success: (data) => {
-                    console.log('GET: data from server:', data);
-                    console.log('Data received');
-                    csvData = data;
+        // // GET CSV data from the server
+        // fetch: (data) => {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: app.server,
+        //         data: data,
+        //         success: (data) => {
+        //             console.log('GET: data from server:', data);
+        //             console.log('Data received');
+        //             csvData = data;
 
-                    app.render(data);
+        //             app.render(data);
 
-                }, 
-                error: (error) => {
-                    console.log('GET Failed');
-                }
-            });
-        },
+        //         }, 
+        //         error: (error) => {
+        //             console.log('GET Failed');
+        //         }
+        //     });
+        // },
 
         render: (data) => {
             var splited = data.split('\n');
