@@ -1,0 +1,31 @@
+{
+  "name": "Connect_Four",
+  "version": "1.0.0",
+  "description": "Build Connect Four Game",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel . -w --out-dir compiled --presets=env,react --ignore=node_modules,compiled --source-maps inline",   
+    "start": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2000prcs/hrsf93-mini-apps-1.git"
+  },
+  "author": "Moyeong Lee <2000prcs@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/2000prcs/hrsf93-mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/2000prcs/hrsf93-mini-apps-1#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1"
+  }
+}
