@@ -1,3 +1,17 @@
+h1 {
+    color: palevioletred;
+    font-family: monospace;
+}
+
+form {
+    font-family: monospace;
+}
+
+input {
+    margin: 5px 5px;
+}
+
+
 table {
     /* width: 200px;
     height: 200px; */
@@ -20,4 +34,16 @@ td {
     background-color:white;
     border-radius: 50%;
     text-align: center;
+}
+
+.pink {
+    background-color: pink;
+}
+
+.red {
+    background-color: red;
+}
+
+.white {
+    background-color: white;
 }
