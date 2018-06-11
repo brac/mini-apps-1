@@ -18,6 +18,10 @@ for(var i = 0; i < tds.length; i ++){
 
 // Reset the game
 var resetGame = function(){
+
+    // Why define tds again here? Can you not use the tds 
+    //     variable that you defined on line 12?
+    
     var tds = document.getElementsByTagName('td');
     for(var i = 0; i < tds.length; i++){
         tds[i].innerHTML = '';
@@ -31,6 +35,11 @@ var resetGame = function(){
             previousText = xUser;
         } 
     }
+
+    // Could you DRY 41-43 up with a helper function? 
+    //     It seems like your also doing this to 
+    //     prevent double clicking
+    
     // Resetting clicked property
     for(var i = 0; i < tds.length; i ++){
         tdsObj[tds[i].id] = {clicked: false};
@@ -40,6 +49,9 @@ var resetGame = function(){
 
 // get usernames for X & O 
 var getUserName = function(id){
+
+    // Why preventDefault()?
+    
     event.preventDefault();
     if(id === 'btn-x'){
         var usernameX = document.getElementById('name-x').value;
